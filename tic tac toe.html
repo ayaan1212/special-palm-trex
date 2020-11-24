@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>bts suuxxxx</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<Style>
+body {
+    background-color: black;
+}
+
+.container {
+    padding-top: 15vh;
+    min-height: 100vh;
+    background-color: #ddd;
+}
+
+#row_Stats {
+    width: 54%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+}
+
+#board {
+    height: 50vh;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tic-tac-toe-row > .col-xs-4 {
+    padding: 0;
+}
+
+.square {
+    height: 16.6vh;
+    background-color: #ff6801;
+    margin: 1.25px;
+    font-size: 16vh;
+    color: white;
+    cursor: pointer;
+}
+
+.square:hover {
+    box-shadow: 0 0 25px #333;
+}
+
+.text-vertical-center {
+    line-height: 16.6vh;
+}
+
+.no-pad {
+    padding: 0 0 0 0;
+}
+
+.modal-content,
+button {
+    border-radius: 0 !important;
+}
+
+.modal-header {
+    background-color: #ff6801;
+    color: #fff;
+}
+
+.modal-body {
+    background-color: #ddd;
+}
+
+.modal-footer {
+    background-color: #ff6801;
+}
+
+button {
+    font-weight: bold !important;
+    color: #ff6801 !important;
+}
+
+.loader {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    width: 7.33333em;
+    height: 7.33333em;
+    margin-left: -3.66667em;
+    margin-top: -3.66667em;
+}
+
+.loader-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    opacity: 0;
+    width: 2em;
+    height: 2em;
+    background: #000000;
+    -webkit-animation: show 0.88s step-end infinite alternate,
+        pulse 0.88s linear infinite alternate;
+    animation: show 0.88s step-end infinite alternate,
+        pulse 0.88s linear infinite alternate;
+}
+
+.loader-block:nth-child(1) {
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    -webkit-animation-delay: 0.065s;
+    animation-delay: 0.065s;
+}
+
+.loader-block:nth-child(2) {
+    -moz-transform: translate(2.66667em, 0);
+    -ms-transform: translate(2.66667em, 0);
+    -webkit-transform: translate(2.66667em, 0);
+    transform: translate(2.66667em, 0);
+    -webkit-animation-delay: 0.13s;
+    animation-delay: 0.13s;
+}
+
+.loader-block:nth-child(3) {
+    -moz-transform: translate(5.33333em, 0);
+    -ms-transform: translate(5.33333em, 0);
+    -webkit-transform: translate(5.33333em, 0);
+    transform: translate(5.33333em, 0);
+    -webkit-animation-delay: 0.195s;
+    animation-delay: 0.195s;
+}
+
+.loader-block:nth-child(4) {
+    -moz-transform: translate(0, 2.66667em);
+    -ms-transform: translate(0, 2.66667em);
+    -webkit-transform: translate(0, 2.66667em);
+    transform: translate(0, 2.66667em);
+    -webkit-animation-delay: 0.325s;
+    animation-delay: 0.325s;
+}
+
+.loader-block:nth-child(5) {
+    -moz-transform: translate(2.66667em, 2.66667em);
+    -ms-transform: translate(2.66667em, 2.66667em);
+    -webkit-transform: translate(2.66667em, 2.66667em);
+    transform: translate(2.66667em, 2.66667em);
+    -webkit-animation-delay: 0.13s;
+    animation-delay: 0.13s;
+}
+
+.loader-block:nth-child(6) {
+    -moz-transform: translate(5.33333em, 2.66667em);
+    -ms-transform: translate(5.33333em, 2.66667em);
+    -webkit-transform: translate(5.33333em, 2.66667em);
+    transform: translate(5.33333em, 2.66667em);
+    -webkit-animation-delay: 0.455s;
+    animation-delay: 0.455s;
+}
+
+.loader-block:nth-child(7) {
+    -moz-transform: translate(0, 5.33333em);
+    -ms-transform: translate(0, 5.33333em);
+    -webkit-transform: translate(0, 5.33333em);
+    transform: translate(0, 5.33333em);
+    -webkit-animation-delay: 0.39s;
+    animation-delay: 0.39s;
+}
+
+.loader-block:nth-child(8) {
+    -moz-transform: translate(2.66667em, 5.33333em);
+    -ms-transform: translate(2.66667em, 5.33333em);
+    -webkit-transform: translate(2.66667em, 5.33333em);
+    transform: translate(2.66667em, 5.33333em);
+    -webkit-animation-delay: 0.26s;
+    animation-delay: 0.26s;
+}
+
+.loader-block:nth-child(9) {
+    -moz-transform: translate(5.33333em, 5.33333em);
+    -ms-transform: translate(5.33333em, 5.33333em);
+    -webkit-transform: translate(5.33333em, 5.33333em);
+    transform: translate(5.33333em, 5.33333em);
+}
+
+@-webkit-keyframes pulse {
+    from,
+    40% {
+        background: #000;
+    }
+    to {
+        background: #dadada;
+    }
+}
+@-webkit-keyframes show {
+    from,
+    40% {
+        opacity: 0;
+    }
+    41%,
+    to {
+        opacity: 1;
+    }
+}
+@keyframes pulse {
+    from,
+    40% {
+        background: #000;
+    }
+    to {
+        background: #dadada;
+    }
+}
+@keyframes show {
+    from,
+    40% {
+        opacity: 0;
+    }
+    41%,
+    to {
+        opacity: 1;
+    }
+}
+/* Body styling */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #999
+        url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9ImNpcmNsZSIgY3k9ImZhcnRoZXN0LXNpZGUiIHI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzMzMzMzMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxMTExMTEiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=");
+    background: #999 -moz-radial-gradient(circle farthest-side, #333333, #111111);
+    background: #999 -webkit-radial-gradient(circle farthest-side, #333333, #111111);
+    background: #999 radial-gradient(circle farthest-side, #333333, #111111);
+}
+</Style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row" id="row_Stats">
+                <div class="col-xs-4 no-pad text-center">
+                    <div>
+                        <strong><u>Player</u></strong>
+                    </div>
+                    <div>
+                        <strong id="playerWins">0</strong>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-xs-offset-4 text-center no-pad">
+                    <div>
+                        <strong><u>Machine</u></strong>
+                    </div>
+                    <div>
+                        <strong id="machineWins">0</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center text-vertical-center" id="board">
+                        <div class="row tic-tac-toe-row">
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="0" data-y-coord="0"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="1" data-y-coord="0"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="2" data-y-coord="0"></div>
+                            </div>
+                        </div>
+                        <div class="row tic-tac-toe-row">
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="0" data-y-coord="1"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="1" data-y-coord="1"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="2" data-y-coord="1"></div>
+                            </div>
+                        </div>
+                        <div class="row tic-tac-toe-row">
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="0" data-y-coord="2"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="1" data-y-coord="2"></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="square" data-x-coord="2" data-y-coord="2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+            </div>
+            <div class="row hidden" id="resetContainer">
+                <div class="col-xs-12 text-center">
+                    <button class="btn btn-default btn-lg" id="btn_Reset">Play Again!</button>
+                </div>
+            </div>
+        </div>
+        <div id="winModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-win-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalText"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="reset('win');">Play Again</button>
+                        <button type="button" class="btn btn-default modal-close" data-dismiss="modal" id="btn_ModalClose">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="drawModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">It's a Draw!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>The truth is, you and the machine are both a couple of losers this time!</p>
+                        <p>Click the Play Again button so that you may redeem or humiliate yourself, or click the Close button so that you may marvel at your lack of ability to outsmart a simple machine that only executes orders given to it.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="reset('draw');">Play Again</button>
+                        <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="playModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">It's TIC-TAC-TOE Time!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Click a button below to select the marker you'd like to use.</p>
+                        <p><strong>NOTE:</strong> X always goes first.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <button type="button" class="btn btn-lg btn-default btn-marker-select" data-marker="X" data-dismiss="modal">X</button>
+                                <button type="button" class="btn btn-lg btn-default btn-marker-select" data-marker="O" data-dismiss="modal">O</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="loader hidden">
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+            <span class="loader-block"></span>
+        </div>
+<Script>
+var board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+];
+var computer = {};
+var player = {};
+var winDetails = { 
+    winner: null,
+    cellCoords_1: "",
+    cellCoords_2: "",
+    cellCoords_3: "",
+    setDefault: function(){
+        this.winner = null;
+        this.cellCoords_1 = "";
+        this.cellCoords_2 = "";
+        this.cellCoords_3 = "";
+    }
+};
+
+$(function() {
+    $("#playModal").modal({ backdrop: "static", keyboard: false });
+    
+    $("body").on("click", ".btn-marker-select", function() {
+        var marker = $(this).data("marker");
+        if(marker === 'O'){
+            displayThinking();
+            setTimeout(function() {
+                startGame(marker);
+            }, 1912);
+        } else
+            startGame(marker);
+    });
+    
+    $(".square").click(function() {
+        if(!$('.loader').is(':visible')){
+            if(winDetails.winner == null && player.turn){
+                var playCoord_X = parseInt($(this).data('x-coord'));
+                var playCoord_Y = parseInt($(this).data('y-coord'));
+                if(board[playCoord_Y][playCoord_X] === ""){
+                    board[playCoord_Y][playCoord_X] = player.marker;
+                    $(this).append('<div class="text-center">' + player.marker + "</div>");
+                    evaluate();
+                    if(winDetails.winner != null)
+                        presentWin("player");
+                    if(isDraw())
+                        presentDraw();
+                    if(winDetails.winner == null & !isDraw()) {
+                        setTimeout(function() {
+                            displayThinking();
+                        }, 150);
+                        setTimeout(function() {
+                            player.turn = false;
+                            computer.turn = true;
+                            computer.move();
+                        }, 1912);
+                    }
+                }
+            }
+        }
+    });
+    
+    $("body").on("click", ".modal-close", function() {
+        $("#resetContainer").toggleClass("hidden");
+    });
+    
+    $("body").on("click", "#btn_Reset", function() {
+        $("#resetContainer").toggleClass("hidden");
+        reset();
+    });
+});
+
+function hideThinker() {
+    $(".loader").addClass("hidden");
+}
+
+function displayThinking() {
+    $(".loader").removeClass("hidden");
+}
+
+function startGame(marker) {
+    player = {
+        turn: marker === "X",
+        marker: marker
+    };
+    computer = {
+        turn: marker === "O",
+        marker: marker === "X" ? "O" : "X",
+        move: function() {
+            var playCoords = getNextMove().split(", ");
+            var x = playCoords[0];
+            var y = playCoords[1];
+            board[y][x] = this.marker;
+            $(".loader").fadeOut("slow", hideThinker());
+            $('.square[data-x-coord="' + x + '"][data-y-coord="' + y + '"]'
+            ).append('<div class="text-center">' + this.marker + "</div>");
+            this.turn = false;
+            player.turn = true;
+            evaluate();
+            if(winDetails.winner != null)
+                presentWin("machine");
+            if(isDraw())
+                presentDraw();
+        }
+    };
+    if (!player.turn) {
+        computer.move();
+    }
+}
+
+function getNextMove() {
+    var playCoords = boardIsEmpty()
+        ? Math.floor(Math.random() * board.length) +
+          ", " +
+          Math.floor(Math.random() * board.length)
+        : checkRowsForWinPlay();
+    return playCoords;
+}
+
+function boardIsEmpty() {
+    return (
+        [].concat.apply([], board).filter(function(s) {
+            return s !== "";
+        }).length === 0
+    );
+}
+
+function checkRowsForWinPlay() {
+    var playCoords = "";
+    var winRows = board.filter(function(r) {
+        return (
+            (r[0] !== "" && r[0] !== player.marker && r[0] === r[1] && r[2] === "") ||
+            (r[0] !== "" && r[0] !== player.marker && r[0] === r[2] && r[1] === "") ||
+            (r[1] !== "" && r[1] !== player.marker && r[1] === r[2] && r[0] === "")
+        );
+    });
+    if (winRows.length === 0) return checkColsForWinPlay();
+    playCoords =
+        winRows[0].indexOf("").toString() + ", " + board.indexOf(winRows[0]);
+    return playCoords;
+}
+
+function checkColsForWinPlay() {
+    var playCoords = "";
+    var cols = getColumns()
+    var winCols = cols.filter(function(c) {
+       return (
+           (c[0] !== "" && c[0] !== player.marker && c[0] === c[1] && c[2] === "") ||
+           (c[0] !== "" && c[0] !== player.marker && c[0] === c[2] && c[1] === "") ||
+           (c[1] !== "" && c[1] !== player.marker && c[1] === c[2] && c[0] === "")
+       );
+    });
+    if (winCols.length === 0) return checkDiagsForWinPlay();
+    playCoords = cols.indexOf(winCols[0]) + ", " + winCols[0].indexOf("");
+    return playCoords;
+}
+
+function checkDiagsForWinPlay() {
+    var playCoords = "";
+    var flatBoard = getFlattenedBoard();
+    var ulDiag = [];
+    var llDiag = [];
+    for(var i = 0; i < flatBoard.length; i++){
+        if(i % 4 === 0){
+            ulDiag.push(flatBoard[i]);
+        }
+    }
+    if(ulDiag.indexOf(player.marker) > -1 || ulDiag.filter(function(s){return s !== '' && s !== player.marker;}).join('').length !== 2){
+        flatBoard.shift();
+        flatBoard.shift();
+        flatBoard.pop();
+        flatBoard.pop();
+        for(var i = 0; i < flatBoard.length; i++){
+            if(i % 2 === 0){
+                llDiag.push(flatBoard[i]);
+            }
+        }
+        if(llDiag.indexOf(player.marker) === -1 && llDiag.filter(function(s){return s !== "" && s !== player.marker;}).join('').length === 2){
+            playCoords = getBlankDiagCoords(llDiag, "ll");
+        }
+    } else{
+        playCoords = getBlankDiagCoords(ulDiag, "ul");
+    }
+    if(playCoords === "") return checkForDefensive();
+    return playCoords;
+}
+
+function getBlankDiagCoords(diag, dir){
+    var playCoords = "";
+    var blankIndex = diag.indexOf("");
+    switch(blankIndex){
+        case 0:
+            playCoords = dir === "ul" ? "0, 0" : "2, 0";
+            break;
+        case 1:
+            playCoords = "1, 1";
+            break;
+        case 2:
+            playCoords = dir === "ul" ? "2, 2" : "0, 2";
+            break;
+        default:
+            break;
+    }
+    return playCoords;
+}
+
+function checkForDefensive(){
+    var playCoords = "";
+    var riskRows = board.filter(function(r) {
+        return (
+            (r[0] === player.marker && r[0] === r[1] && r[2] === "") ||
+            (r[0] === player.marker && r[0] === r[2] && r[1] === "") ||
+            (r[1] === player.marker && r[1] === r[2] && r[0] === "")
+        );
+    });
+    if(riskRows.length === 0){
+        var cols = getColumns();
+        var riskCols = cols.filter(function(c) {
+           return (
+               (c[0] === player.marker && c[0] === c[1] && c[2] === "") ||
+               (c[0] === player.marker && c[0] === c[2] && c[1] === "") ||
+               (c[1] === player.marker && c[1] === c[2] && c[0] === "")
+           );
+        });
+        if(riskCols.length === 0){
+            var playCoords = "";
+            var flatBoard = getFlattenedBoard();
+            var ulDiag = [];
+            var llDiag = [];
+            for(var i = 0; i < flatBoard.length; i++){
+                if(i % 4 === 0){
+                    ulDiag.push(flatBoard[i]);
+                }
+            }
+            if(ulDiag.indexOf(computer.marker) > -1 || ulDiag.filter(function(s){return s === player.marker;}).join('').length !== 2){
+                flatBoard.shift();
+                flatBoard.shift();
+                flatBoard.pop();
+                flatBoard.pop();
+                for(var i = 0; i < flatBoard.length; i++){
+                    if(i % 2 === 0){
+                        llDiag.push(flatBoard[i]);
+                    }
+                }
+                if(llDiag.indexOf("") > -1 && llDiag.filter(function(s){return s == player.marker;}).join('').length === 2){
+                    playCoords = getBlankDiagCoords(llDiag, "ll");
+                }
+            } else{
+                playCoords = getBlankDiagCoords(ulDiag, "ul");
+            }
+        } else {
+            playCoords = cols.indexOf(riskCols[0]) + ", " + riskCols[0].indexOf("");
+        }
+    } else {
+        playCoords = riskRows[0].indexOf("") + ", " + board.indexOf(riskRows[0]);
+    }
+    if(playCoords === "") return checkForClearDrive();
+    return playCoords;
+}
+
+function checkForClearDrive(){
+    var playCoords = "";
+    var buildRows = board.filter(function(r){
+        return r.indexOf(player.marker) === -1 && r.indexOf(computer.marker) > -1;
+    });
+    if(buildRows.length > 0)
+        playCoords = buildRows[0].indexOf("") +", " + board.indexOf(buildRows[0]);
+    else {
+        var cols = getColumns();
+        var buildCols = cols.filter(function(c){
+            return c.indexOf(player.marker) === -1 && c.indexOf(computer.marker) > -1;
+        });
+        if(buildCols.length > 0)
+            playCoords = cols.indexOf(buildCols[0]) + ", " + buildCols[0].indexOf("");
+        else {
+            var flatBoard = getFlattenedBoard();
+            var ulDiag = [];
+            var llDiag = [];
+            for(var i = 0; i < flatBoard.length; i++){
+                if(i % 4 === 0){
+                    ulDiag.push(flatBoard[i]);
+                }
+            }
+            if(ulDiag.indexOf(player.marker) !== -1 || ulDiag.indexOf(computer.marker) === -1){
+                flatBoard.shift();
+                flatBoard.shift();
+                flatBoard.pop();
+                flatBoard.pop();
+                for(var i = 0; i < flatBoard.length; i++){
+                    if(i % 2 === 0){
+                        llDiag.push(flatBoard[i]);
+                    }
+                }
+                if(llDiag.indexOf(player.marker) === -1 && llDiag.indexOf(computer.marker) !== -1){
+                    playCoords = getBlankDiagCoords(llDiag, "ll");
+                }
+            } else
+                playCoords = getBlankDiagCoords(ulDiag, "ul");
+        }
+    }
+    if(playCoords === "") return playBlank();
+    return playCoords;
+}
+
+function playBlank() {
+    var playCoords = "";
+    var rowsWithBlanks = board.filter(function(r){
+        return r.indexOf("") > -1;
+    });
+    if(rowsWithBlanks.length > 0){
+        var rdmIndex = Math.floor(Math.random() * rowsWithBlanks.length);
+        playCoords = rowsWithBlanks[rdmIndex].indexOf("") + ", " + board.indexOf(rowsWithBlanks[rdmIndex]);
+    }
+    else {
+        var cols = getColumns();
+        var colsWithBlanks = cols.filter(function(c) {
+            return c.indexOf("") > -1;
+        });
+        if(colsWithBlanks.length > 0)
+            playCoords = cols.indexOf(colsWithBlanks[0]) + ", " + colsWithBlanks[0].indexOf("");
+        else {
+            var flatBoard = getFlattenedBoard();
+            var ulDiag = [];
+            var llDiag = [];
+            for(var i = 0; i < flatBoard.length; i++){
+                if(i % 4 === 0){
+                    ulDiag.push(flatBoard[i]);
+                }
+            }
+            if(ulDiag.indexOf("") === -1){
+                flatBoard.shift();
+                flatBoard.shift();
+                flatBoard.pop();
+                flatBoard.pop();
+                for(var i = 0; i < flatBoard.length; i++){
+                    if(i % 2 === 0){
+                        llDiag.push(flatBoard[i]);
+                    }
+                }
+                if(llDiag.indexOf("") !== -1){
+                    playCoords = getBlankDiagCoords(llDiag, "ll");
+                }
+            } else
+                playCoords = getBlankDiagCoords(ulDiag, "ul");
+        }
+    }
+    return playCoords;
+}
+
+function evaluate(){
+    debugger;
+    var winRows = board.filter(function(r){
+        return r[0] !== "" && r[0] === r[1] && r[1] === r[2];
+    });
+    if(winRows.length > 0){
+        if(winRows[0][0] === player.marker)
+            winDetails.winner = player;
+        else
+            winDetails.winner = computer;
+        var yCoord = board.indexOf(winRows[0]);
+        winDetails.cellCoords_1 = "0, " + yCoord;
+        winDetails.cellCoords_2 = "1, " + yCoord;
+        winDetails.cellCoords_3 = "2, " + yCoord;
+    } else {
+        var cols = getColumns();
+        var winCols = cols.filter(function(c){
+            return c[0] !== "" && c[0] === c[1] && c[1] === c[2];
+        });
+        if(winCols.length > 0){
+            if(winCols[0][0] === player.marker)
+                winDetails.winner = player;
+            else
+                winDetails.winner = computer;
+            var xCoord = cols.indexOf(winCols[0]);
+            winDetails.cellCoords_1 = xCoord + ", 0";
+            winDetails.cellCoords_2 = xCoord + ", 1";
+            winDetails.cellCoords_3 = xCoord + ", 2";
+        } else {
+            var flatBoard = getFlattenedBoard();
+            var ulDiag = [];
+            for(var i = 0; i < flatBoard.length; i++){
+                if(i % 4 === 0){
+                    ulDiag.push(flatBoard[i]);
+                }
+            }
+            if(ulDiag[0] !== "" && ulDiag[0] === ulDiag[1] && ulDiag[1] === ulDiag[2]){
+                if(ulDiag[0] === player.marker)
+                    winDetails.winner = player;
+                else
+                    winDetails.winner = computer;
+                winDetails.cellCoords_1 = "0, 0";
+                winDetails.cellCoords_2 = "1, 1";
+                winDetails.cellCoords_3 = "2, 2";
+            } else {
+                var llDiag = [];
+                flatBoard.shift();
+                flatBoard.shift();
+                flatBoard.pop();
+                flatBoard.pop();
+                for(var i = 0; i < flatBoard.length; i++){
+                    if(i % 2 === 0){
+                        llDiag.push(flatBoard[i]);
+                    }
+                }
+                if(llDiag[0] !== "" && llDiag[0] === llDiag[1] && llDiag[1] === llDiag[2]){
+                    if(llDiag[0] === player.marker)
+                        winDetails.winner = player;
+                    else
+                        winDetails.winner = computer;
+                    winDetails.cellCoords_1 = "2, 0";
+                    winDetails.cellCoords_2 = "1, 1";
+                    winDetails.cellCoords_3 = "0, 2";
+                }
+            }
+        }
+    }
+}
+
+function isDraw(){
+    return winDetails.winner == null && board.filter(function(r){return r.indexOf("") > - 1}).length === 0;
+}
+
+function presentDraw() {
+    $('#drawModal').modal({backdrop: 'static', keyboard: false});
+}
+
+function presentWin(winner) {
+    debugger;
+    var cell_1_Coords = winDetails.cellCoords_1.split(",");
+    var cell_1_X = cell_1_Coords[0].trim();
+    var cell_1_Y = cell_1_Coords[1].trim();
+    var cell_2_Coords = winDetails.cellCoords_2.split(",");
+    var cell_2_X = cell_2_Coords[0].trim();
+    var cell_2_Y = cell_2_Coords[1].trim();
+    var cell_3_Coords = winDetails.cellCoords_3.split(",");
+    var cell_3_X = cell_3_Coords[0].trim();
+    var cell_3_Y = cell_3_Coords[1].trim();
+    $('.square[data-x-coord="' + cell_1_X + '"][data-y-coord="' + cell_1_Y + '"], .square[data-x-coord="' + cell_2_X + '"][data-y-coord="' + cell_2_Y + '"], .square[data-x-coord="' + cell_3_X +'"][data-y-coord="' + cell_3_Y + '"]').fadeOut(1000, function(){
+        $(this).css("background-color", "#bb00ff");
+    }).fadeIn(1000);
+    var playerWins = winDetails.winner === player;
+    var winTitle = "You " + (playerWins ? "Win" : "Lose") + "!";
+    var winMessage = playerWins ? 
+        "<p>Congratulations! You've shown that you can outsmart a machine that is superior to you in almost every way! Great Job!</p><p>Click the Play Again button to really give the machine what-for, or click the Close button to marvel at your victory.</p>" :
+    "<p>Well, you really put on a show of how inept you are when it comes to besting a metal box at logical thought. The best thing for you to do at this point is just go make a cup of tea, sit down and slap yourself 555 times.</p><p>Click the Play Again button to try to redeem yourself.</p>";
+    $('.modal-win-title').text(winTitle);
+    $('#modalText').html(winMessage);
+    $("#winModal").modal({backdrop: 'static', keyboard: false});
+    $('#' + winner + 'Wins').text(parseInt($('#' + winner + 'Wins').text()) + 1);
+}
+
+function reset(modal) {
+    if ($('#'+modal+'Modal').is(":visible")) 
+        $('#'+modal+'Modal').modal("toggle");
+    winDetails.setDefault();
+    $(".square").fadeOut(1000, function(){
+        $(this).css("background-color", "#ff6801");
+        $(this).empty();
+    }).fadeIn(1000);
+    board = getNewBoard();
+    $('#playModal').modal({background: 'static', keyboard: false});
+}
+
+function getNewBoard() {
+    return [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ];
+}
+
+function getColumns(){
+    var cols = [];
+    for (var i = 0; i < board.length; i++) {
+        cols.push([board[0][i], board[1][i], board[2][i]]);
+    }
+    return cols;
+}
+
+function getFlattenedBoard(){
+    return [].concat.apply([], board);
+}
+</Script>
+
+
+    </body>
+</html>
